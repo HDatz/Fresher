@@ -1,34 +1,43 @@
 package Vmo.Springpro.Model;
 
 import java.sql.Date;
+import jakarta.persistence.*;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+@Entity
+@Data
 
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Project {
-	private int project_id;
-	
-	private String projetc_name;
-	
-	private String project_code;
-	
-	private Center center_id;
-	
-	private String manager;
-	
-	private Date start_date;
-	
-	private Date end_date;
-	
-	private String programming_language;
-	
-	private String status;
-	
-	
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int projectId;
+
+    @Column(nullable = false, length = 100)
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "center_id")
+    private Center center;
+
+    @Column(length = 100)
+    private String manager;
+
+    @Column
+    private Date startDate;
+
+    @Column
+    private Date endDate;
+
+    @Column(length = 50)
+    private String language;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProjectStatus status;
+
+    public enum ProjectStatus {
+        NOT_START, ONGOING, CANCELED, CLOSED
+    }
 }
+
