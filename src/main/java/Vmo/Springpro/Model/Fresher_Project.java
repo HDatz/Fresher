@@ -1,7 +1,8 @@
 package Vmo.Springpro.Model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+
 
 @Entity
 @Data
@@ -13,10 +14,10 @@ public class Fresher_Project {
 
     @ManyToOne
     @JoinColumn(name = "fresher_id")
-    private Fresher fresher;
+    private Fresher fresher_id;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    private Project project;
+    private Project project_id;
 }
 

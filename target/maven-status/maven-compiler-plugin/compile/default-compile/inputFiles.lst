@@ -1,0 +1,15 @@
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Controller/CenterController.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Controller/FresherController.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Dtorequest/CenterCreationRequest.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Dtorequest/FresherCreationRequest.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/FresherApplication.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Model/Center.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Model/EmailLogs.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Model/Fresher.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Model/Fresher_Project.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Model/Project.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Model/Scores.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Service/CenterService.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/Service/FresherService.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/repository/CenterRepository.java
+/Users/fstudio/Documents/Springpro/src/main/java/Vmo/Springpro/repository/FresherRepository.java

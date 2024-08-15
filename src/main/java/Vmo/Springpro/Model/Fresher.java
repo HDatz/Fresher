@@ -9,7 +9,7 @@ public class Fresher {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int fresherId;
+    private int fresher_id;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -21,9 +21,9 @@ public class Fresher {
     private String phone;
 
     @Column(length = 50)
-    private String programmingLanguage;
+    private String programming_language;
 
     @ManyToOne
     @JoinColumn(name = "center_id")
-    private Center center;
+    private Center center_id;
 }

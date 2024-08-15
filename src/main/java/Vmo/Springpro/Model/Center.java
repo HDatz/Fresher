@@ -3,18 +3,23 @@ package Vmo.Springpro.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+    
 @Entity
 @Data
+@Table(name = "Center")
 public class Center {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int centerId;
-
-    @Column(nullable = false, length = 100)
+    @Column(name = "center_id")
+    private Integer centerId;
+    
+    @Column(name = "name")
     private String name;
-
-    @Column(length = 255)
+    
+    @Column(name = "address")
     private String address;
 }
+
+    
 

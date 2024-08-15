@@ -12,19 +12,19 @@ public class EmailLogs {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int emailLogId;
+    private int email_log_id;
 
     @ManyToOne
     @JoinColumn(name = "fresher_id")
-    private Fresher fresher;
+    private Fresher fresher_id;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    private Project project;
+    private Project project_id;
 
     @Column(length = 50)
     private String action;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Timestamp emailSentTime;
+    private Timestamp  email_sent_time;
 }
