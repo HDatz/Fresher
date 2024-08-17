@@ -17,10 +17,14 @@ public class FresherController {
 
     @Autowired
     private FresherService fresherService;
+    
 
     // Tạo một Fresher mới
     @PostMapping
     public ResponseEntity<Fresher> createFresher(@RequestBody FresherCreationRequest request) {
+        if (fresherService.existsByEmail(request.getEmail())) {
+            return ResponseEntity.badRequest().body(null);  // Trả về mã trạng thái 400 Bad Request
+        }
         Fresher fresher = fresherService.createFresher(request);
         return ResponseEntity.status(201).body(fresher); // Trả về mã trạng thái 201 Created
     }

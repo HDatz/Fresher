@@ -1,9 +1,11 @@
 package Vmo.Springpro.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Vmo.Springpro.Dtorequest.CenterCreationRequest;
-import Vmo.Springpro.Exception.CenterNotFoundException;
+import Vmo.Springpro.Error.CenterNotFoundException;
 import Vmo.Springpro.Model.Center;
 import Vmo.Springpro.repository.CenterRepository;
 import jakarta.validation.Valid;
@@ -23,7 +25,10 @@ public class CenterService {
         center.setAddress(request.getAddress());
         return centerRepository.save(center);
     }
-
+    //Lấy tất cả center
+    public List<Center> getAllCenter() {
+        return centerRepository.findAll();
+    }
     // Lấy Center theo ID
     public Center getCenterById(int id) {
         return centerRepository.findById(id)

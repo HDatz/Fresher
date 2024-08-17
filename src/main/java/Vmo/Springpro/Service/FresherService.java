@@ -23,6 +23,8 @@ public class FresherService {
     // Tạo mới một fresher
     public Fresher createFresher(FresherCreationRequest request) {
         Fresher fresher = new Fresher();
+        fresher.setUsername(request.getUsername());  // Set username
+        fresher.setPassword(request.getPassword());  // Set password
         fresher.setName(request.getName());
         fresher.setEmail(request.getEmail());
         fresher.setPhone(request.getPhone());
@@ -34,6 +36,11 @@ public class FresherService {
         fresher.setCenter_id(center);
 
         return fresherRepository.save(fresher);
+    }
+
+    // Kiểm tra sự tồn tại của email
+    public boolean existsByEmail(String email) {
+        return fresherRepository.existsByEmail(email);
     }
 
     // Lấy danh sách tất cả fresher
@@ -51,7 +58,9 @@ public class FresherService {
     public Fresher updateFresher(int id, FresherCreationRequest request) {
         Fresher fresher = fresherRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Fresher not found"));
-        
+
+        fresher.setUsername(request.getUsername());  // Update username
+        fresher.setPassword(request.getPassword());  // Update password
         fresher.setName(request.getName());
         fresher.setEmail(request.getEmail());
         fresher.setPhone(request.getPhone());
@@ -73,5 +82,4 @@ public class FresherService {
             return false; // Trả về false nếu fresher không tồn tại
         }
     }
-
 }

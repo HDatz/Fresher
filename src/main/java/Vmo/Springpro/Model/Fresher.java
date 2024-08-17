@@ -5,7 +5,11 @@ import lombok.*;
 
 @Entity
 @Data
-public class Fresher {
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)  // To handle Lombok's equals/hashCode with inheritance
+@ToString(callSuper = true)           // To include User's fields in the toString method
+public class Fresher extends User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

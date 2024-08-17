@@ -4,6 +4,8 @@ import Vmo.Springpro.Dtorequest.CenterCreationRequest;
 import Vmo.Springpro.Model.Center;
 import Vmo.Springpro.Service.CenterService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,14 @@ public class CenterController {
         Center center = centerService.createCenter(request);
         return ResponseEntity.status(201).body(center);
     }
-
+    
+    @GetMapping
+    public ResponseEntity<List<Center>> getAllCenter() {
+        List<Center> centers = centerService.getAllCenter();
+        return ResponseEntity.ok(centers);
+    }
+    
+    
     @GetMapping("/{id}")
     public ResponseEntity<Center> getCenterById(@PathVariable int id) {
         Center center = centerService.getCenterById(id);
