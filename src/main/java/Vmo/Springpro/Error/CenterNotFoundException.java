@@ -19,4 +19,5 @@ public class CenterNotFoundException extends RuntimeException {
     public CenterNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
+    
 }
