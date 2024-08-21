@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)  // To handle Lombok's equals/hashCode with inheritance
 @ToString(callSuper = true)           // To include User's fields in the toString method
+@Table(name = "fresher")
 public class Fresher extends User {
     
     @Id
@@ -24,7 +25,7 @@ public class Fresher extends User {
     @Column(length = 20)
     private String phone;
 
-    @Column(length = 50)
+    @Column(name = "programming_language",length = 50)
     private String programming_language;
 
     @ManyToOne

@@ -28,7 +28,8 @@ public class CenterService {
         }
 
         Center center = new Center();
-       
+        center.setName(request.getName());
+        center.setAddress(request.getAddress());
         return centerRepository.save(center);
     }
 

@@ -34,7 +34,7 @@ public class FresherService {
         fresher.setName(request.getName());
         fresher.setEmail(request.getEmail());
         fresher.setPhone(request.getPhone());
-        fresher.setProgramming_language(request.getProgrammingLanguage());
+        fresher.setProgramming_language(request.getProgramming_language());
 
         // Liên kết fresher với center
         Center center = centerRepository.findById(request.getCenterId())
@@ -53,13 +53,28 @@ public class FresherService {
     public List<Fresher> getAllFreshers() {
         return fresherRepository.findAll(); // Giữ nguyên mật khẩu mã hóa
     }
-
+    
+    // Tìm kiếm fresher theo  
+    public List<Fresher> sreachByName(String name){
+    	return fresherRepository.findByNameContainingIgnoreCase(name);
+    }
+    
+    // Tìm kiếm fresher theo Email
+    public List<Fresher> sreachByEmail(String email){
+    	return fresherRepository.findByEmailContainingIgnoreCase(email);
+    }
+    
+	public List<Fresher> sreachByLangue(String programming_language) {
+		return fresherRepository.findByProgrammingLanguage(programming_language);
+	}
+    
+    
     // Lấy một fresher theo ID (giữ nguyên mật khẩu mã hóa)
     public Fresher getFresherById(int id) {
         return fresherRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorClass.FP_NOT_FOUND));
     }
-
+    
     // Cập nhật thông tin của fresher
     public Fresher updateFresher(int id, FresherCreationRequest request) {
         Fresher fresher = fresherRepository.findById(id)
@@ -70,7 +85,7 @@ public class FresherService {
         fresher.setName(request.getName());
         fresher.setEmail(request.getEmail());
         fresher.setPhone(request.getPhone());
-        fresher.setProgramming_language(request.getProgrammingLanguage());
+        fresher.setProgramming_language(request.getProgramming_language());
 
         Center center = centerRepository.findById(request.getCenterId())
                 .orElseThrow(() -> new AppException(ErrorClass.CENTER_NOT_FOUND));

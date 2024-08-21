@@ -1,9 +1,11 @@
 package Vmo.Springpro.Service;
 
+import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,12 +14,17 @@ import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.JWSObject;
+import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.Payload;
 import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
 
 import Vmo.Springpro.Dtorequest.AuthenticationRequest;
+import Vmo.Springpro.Dtorequest.IntrospectRequest;
 import Vmo.Springpro.Dtorequest.response.AuthenticationResponse;
+import Vmo.Springpro.Dtorequest.response.IntrospectResponse;
 import Vmo.Springpro.Error.AppException;
 import Vmo.Springpro.Error.ErrorClass;
 import Vmo.Springpro.repository.FresherRepository;
@@ -34,13 +41,29 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthenticationService {
 
     FresherRepository fresherRepository; 
-
+    
     @NonFinal
-    protected static final String SIGNER_KEY =
-    		"gmmcbXcy2qogtfLFaPy/nBypAtu/hkRRMz+t5n5mSEcuWAbn1DlDGmjn5WRwXdIn";
-
+    @Value("${jwt.signer-key}")
+    private String SIGNER_KEY;
+    
+    public IntrospectResponse introspect(IntrospectRequest request) throws JOSEException, ParseException {
+    	var token = request.getToken();
+    	
+    	JWSVerifier verfirer = new MACVerifier(SIGNER_KEY.getBytes());
+    	
+    	SignedJWT signedJWT = SignedJWT.parse(token);
+    	
+    	Date expityTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+    	
+    	var verified = signedJWT.verify(verfirer);
+    	
+    	return IntrospectResponse.builder()
+    			.valid(verified && expityTime.after(new Date()))
+    			.build();
+    }
+    
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        var fresher = fresherRepository.findByUsername(request.getUsername())
+        var fresher = fresherRepository.findByName(request.getUsername())
                 .orElseThrow(() -> new AppException(ErrorClass.USER_NOT_EXISTED));
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);

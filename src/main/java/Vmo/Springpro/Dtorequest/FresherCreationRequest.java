@@ -9,6 +9,6 @@ public class FresherCreationRequest {
     private String name;
     private String email;
     private String phone;
-    private String programmingLanguage;
+    private String programming_language;
     private int centerId;
 }
