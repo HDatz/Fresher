@@ -52,8 +52,8 @@ public class FPController {
     public ResponseEntity<ApiRespone<Fresher_Project>> updateFresherProject(@PathVariable int id, @RequestBody FPCreationRequest request) {
         try {
             Fresher_Project updatedFresherProject = new Fresher_Project();
-            updatedFresherProject.setFresher_id(fpService.getFresherById(request.getFresherid()));
-            updatedFresherProject.setProject_id(fpService.getProjectById(request.getProjectid()));
+            updatedFresherProject.setFresher(fpService.getFresherById(request.getFresherid()));
+            updatedFresherProject.setProject(fpService.getProjectById(request.getProjectid()));
             Fresher_Project fp = fpService.updateFresherProject(id, updatedFresherProject);
             ApiRespone<Fresher_Project> response = new ApiRespone<>(200, "Fresher_Project updated successfully", fp);
             return ResponseEntity.ok(response);

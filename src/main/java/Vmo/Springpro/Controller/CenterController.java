@@ -3,6 +3,7 @@ package Vmo.Springpro.Controller;
 import Vmo.Springpro.Dtorequest.ApiRespone;
 import Vmo.Springpro.Dtorequest.CenterCreationRequest;
 import Vmo.Springpro.Model.Center;
+import Vmo.Springpro.Model.Fresher;
 import Vmo.Springpro.Service.CenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,5 +53,13 @@ public class CenterController {
         centerService.deleteCenter(id);
         ApiRespone<Void> apiResponse = new ApiRespone<>(200, "Center deleted successfully", null);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(apiResponse);
+    }
+    
+ // API mới: Lấy danh sách Fresher theo centerId
+    @GetMapping("/{centerId}/freshers")
+    public ResponseEntity<ApiRespone<List<Fresher>>> getFreshersByCenter(@PathVariable int centerId) {
+        List<Fresher> freshers = centerService.getFreshersByCenterId(centerId);
+        ApiRespone<List<Fresher>> apiResponse = new ApiRespone<>(200, "Fetched freshers successfully", freshers);
+        return ResponseEntity.ok(apiResponse);
     }
 }

@@ -10,13 +10,18 @@ import Vmo.Springpro.Dtorequest.CenterCreationRequest;
 import Vmo.Springpro.Error.AppException;
 import Vmo.Springpro.Error.ErrorClass;
 import Vmo.Springpro.Model.Center;
+import Vmo.Springpro.Model.Fresher;
 import Vmo.Springpro.repository.CenterRepository;
+import Vmo.Springpro.repository.FresherRepository;
 
 @Service
 public class CenterService {
 
     @Autowired
     private CenterRepository centerRepository;
+    
+    @Autowired
+    private FresherRepository fresherRepository;
     
     
 
@@ -43,6 +48,13 @@ public class CenterService {
     public Center getCenterById(int id) {
         return centerRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorClass.CENTER_NOT_FOUND));
+    }
+    
+    // Lấy danh sách Fresher theo centerId
+    public List<Fresher> getFreshersByCenterId(int centerId) {
+        Center center = centerRepository.findById(centerId)
+                                         .orElseThrow(() -> new AppException(ErrorClass.CENTER_NOT_FOUND));
+        return fresherRepository.findByCenter(center);
     }
 
     // Cập nhật thông tin Center

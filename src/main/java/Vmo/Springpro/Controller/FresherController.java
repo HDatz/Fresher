@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import Vmo.Springpro.Dtorequest.ApiRespone;
 import Vmo.Springpro.Dtorequest.FresherCreationRequest;
 import Vmo.Springpro.Model.Fresher;
+import Vmo.Springpro.Model.Project;
+import Vmo.Springpro.Service.FPService;
 import Vmo.Springpro.Service.FresherService;
 
 import java.util.List;
@@ -19,6 +21,9 @@ public class FresherController {
 
 	@Autowired
 	private FresherService fresherService;
+	
+	@Autowired
+    private FPService fresherProjectService;
 
 	// Tạo một Fresher mới
 	@PostMapping
@@ -78,6 +83,11 @@ public class FresherController {
 	    return ResponseEntity.ok(new ApiRespone<>(200,"Freshers found", freshers));
 	}
 
+	@GetMapping("/{fresherId}/projects")
+    public ResponseEntity<List<Project>> getProjectsByFresher(@PathVariable int fresherId) {
+        List<Project> projects = fresherProjectService.getProjectsByFresher(fresherId);
+        return ResponseEntity.ok(projects);
+    }
 	
 	// Cập nhật thông tin Fresher
 	@PutMapping("/{id}")

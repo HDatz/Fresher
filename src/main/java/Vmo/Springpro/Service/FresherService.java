@@ -2,7 +2,6 @@ package Vmo.Springpro.Service;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +23,7 @@ public class FresherService {
 
     @Autowired
     private CenterRepository centerRepository;
+    
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 
@@ -40,7 +40,7 @@ public class FresherService {
         // Liên kết fresher với center
         Center center = centerRepository.findById(request.getCenterId())
                 .orElseThrow(() -> new AppException(ErrorClass.CENTER_NOT_FOUND));
-        fresher.setCenter_id(center);
+        fresher.setCenter(center);
 
         return fresherRepository.save(fresher);
     }
@@ -78,6 +78,8 @@ public class FresherService {
         return fresherRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorClass.FP_NOT_FOUND));
     }
+
+
     
     // Cập nhật thông tin của fresher
     public Fresher updateFresher(int id, FresherCreationRequest request) {
@@ -93,7 +95,7 @@ public class FresherService {
 
         Center center = centerRepository.findById(request.getCenterId())
                 .orElseThrow(() -> new AppException(ErrorClass.CENTER_NOT_FOUND));
-        fresher.setCenter_id(center);
+        fresher.setCenter(center);
 
         return fresherRepository.save(fresher);
     }

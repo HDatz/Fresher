@@ -15,6 +15,7 @@ import Vmo.Springpro.Error.AppException;
 import Vmo.Springpro.Error.ErrorClass;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FPService {
@@ -37,28 +38,43 @@ public class FPService {
                 .orElseThrow(() -> new AppException(ErrorClass.PROJECT_NOT_FOUND));
         
         Fresher_Project fresherProject = new Fresher_Project();
-        fresherProject.setFresher_id(fresher);
-        fresherProject.setProject_id(project);
+        fresherProject.setFresher(fresher);
+        fresherProject.setProject(project);
         
         return fpRepository.save(fresherProject);
     }
     
+    
     public List<Fresher_Project> getAllFresherProjects() {
         return fpRepository.findAll();
     }
+    
+    
+    public List<Project> getProjectsByFresher(int fresherId) {
+        Fresher fresher = fresherRepository.findById(fresherId)
+                .orElseThrow(() -> new AppException(ErrorClass.USER_EXISTED));
+        
+        List<Fresher_Project> fresherProjects = fpRepository.findByFresher(fresher);
+        return fresherProjects.stream()
+                .map(Fresher_Project::getProject)
+                .collect(Collectors.toList());
+    }
+    
 
     public Fresher_Project getFresherProjectById(int id) {
         return fpRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorClass.FP_NOT_FOUND));
     }
+    
+    
 
     @Transactional
     public Fresher_Project updateFresherProject(int id, Fresher_Project updatedFresherProject) {
         Fresher_Project fresherProject = fpRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorClass.FP_NOT_FOUND));
         
-        fresherProject.setFresher_id(updatedFresherProject.getFresher_id());
-        fresherProject.setProject_id(updatedFresherProject.getProject_id());
+        fresherProject.setFresher(updatedFresherProject.getFresher());
+        fresherProject.setProject(updatedFresherProject.getProject());
         
         return fpRepository.save(fresherProject);
     }

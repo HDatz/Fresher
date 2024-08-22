@@ -30,5 +30,5 @@ public class Fresher extends User {
 
     @ManyToOne
     @JoinColumn(name = "center_id")
-    private Center center_id;
+    private Center center;
 }

@@ -14,10 +14,10 @@ public class Fresher_Project {
 
     @ManyToOne
     @JoinColumn(name = "fresher_id")
-    private Fresher fresher_id;
+    private Fresher fresher;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
-    private Project project_id;
+    private Project project;
 }
 

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import Vmo.Springpro.Model.Center;
 import Vmo.Springpro.Model.Fresher;
 
 public interface FresherRepository extends JpaRepository<Fresher, Integer> {
@@ -13,11 +15,14 @@ public interface FresherRepository extends JpaRepository<Fresher, Integer> {
     
     Optional<Fresher> findByName(String Username);  
     
+    List<Fresher> findByCenter(Center center_id);
+    
     List<Fresher> findByNameContainingIgnoreCase(String name);
     
     List<Fresher> findByEmailContainingIgnoreCase(String email);
     
     List<Fresher> findByProgrammingLanguage(String programmingLanguage);
+    
     
 
 
