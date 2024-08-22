@@ -7,6 +7,8 @@ import lombok.*;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Scores {
 
     @Id
@@ -26,11 +28,16 @@ public class Scores {
     @Column(nullable = false)
     private float assignment3;
 
-    @Transient
-    private float finalScore;
+    @Column(name = "final_score")
+    private Float finalScore;
 
+    @PrePersist
+    @PreUpdate
     @PostLoad
     private void calculateFinalScore() {
         this.finalScore = (assignment1 + assignment2 + assignment3) / 3;
     }
+
+
+
 }

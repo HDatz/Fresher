@@ -1,11 +1,14 @@
 package Vmo.Springpro.Model;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
     
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Center")
 public class Center {
 
@@ -19,6 +22,11 @@ public class Center {
     
     @Column(name = "address")
     private String address;
+    
+  
+   
+    
+
 }
 
     

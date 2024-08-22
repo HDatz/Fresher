@@ -31,6 +31,7 @@ public class CenterController {
         ApiRespone<List<Center>> apiResponse = new ApiRespone<>(200, "Fetched all centers successfully", centers);
         return ResponseEntity.ok(apiResponse);
     }
+    
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiRespone<Center>> getCenterById(@PathVariable int id) {

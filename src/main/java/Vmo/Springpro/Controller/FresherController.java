@@ -68,16 +68,16 @@ public class FresherController {
         return ResponseEntity.ok(new ApiRespone<>(200, "Freshers found", freshers));
     }
 	
-//	//Tìm theo Ngôn Ngữ
-	@GetMapping("/langue/{langue}")
-	public ResponseEntity<ApiRespone<List<Fresher>>> getFreshersLangue(@PathVariable String programming_language){
-		List<Fresher> freshers = fresherService.sreachByLangue(programming_language);
-		if(freshers.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body(new ApiRespone<>(404, "No Freshers found with the given langue", null));
-		}
-		return ResponseEntity.ok(new ApiRespone<>(200,"Freshers found",freshers));
+	@GetMapping("/langue/{language}")
+	public ResponseEntity<ApiRespone<List<Fresher>>> getFreshersLangue(@PathVariable String language) {
+	    List<Fresher> freshers = fresherService.sreachByLangue(language);
+	    if (freshers.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(new ApiRespone<>(404, "No Freshers found with the given language", null));
+	    }
+	    return ResponseEntity.ok(new ApiRespone<>(200,"Freshers found", freshers));
 	}
+
 	
 	// Cập nhật thông tin Fresher
 	@PutMapping("/{id}")

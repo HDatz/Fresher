@@ -2,6 +2,7 @@ package Vmo.Springpro.Service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +35,7 @@ public class FresherService {
         fresher.setName(request.getName());
         fresher.setEmail(request.getEmail());
         fresher.setPhone(request.getPhone());
-        fresher.setProgramming_language(request.getProgramming_language());
+        fresher.setProgrammingLanguage(request.getProgrammingLanguages());
 
         // Liên kết fresher với center
         Center center = centerRepository.findById(request.getCenterId())
@@ -48,6 +49,8 @@ public class FresherService {
     public boolean existsByEmail(String email) {
         return fresherRepository.existsByEmail(email);
     }
+    
+ 
 
     // Lấy danh sách tất cả fresher (giữ nguyên mật khẩu mã hóa)
     public List<Fresher> getAllFreshers() {
@@ -64,9 +67,10 @@ public class FresherService {
     	return fresherRepository.findByEmailContainingIgnoreCase(email);
     }
     
-	public List<Fresher> sreachByLangue(String programming_language) {
-		return fresherRepository.findByProgrammingLanguage(programming_language);
-	}
+    // Tk fresher theo ProgrammingLanguage
+    public List<Fresher> sreachByLangue(String language) {
+        return fresherRepository.findByProgrammingLanguage(language);
+    }
     
     
     // Lấy một fresher theo ID (giữ nguyên mật khẩu mã hóa)
@@ -85,7 +89,7 @@ public class FresherService {
         fresher.setName(request.getName());
         fresher.setEmail(request.getEmail());
         fresher.setPhone(request.getPhone());
-        fresher.setProgramming_language(request.getProgramming_language());
+        fresher.setProgrammingLanguage(request.getProgrammingLanguages());
 
         Center center = centerRepository.findById(request.getCenterId())
                 .orElseThrow(() -> new AppException(ErrorClass.CENTER_NOT_FOUND));

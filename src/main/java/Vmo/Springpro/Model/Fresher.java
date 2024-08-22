@@ -25,8 +25,8 @@ public class Fresher extends User {
     @Column(length = 20)
     private String phone;
 
-    @Column(name = "programming_language",length = 50)
-    private String programming_language;
+    @Column(name = "programming_language")
+    private String programmingLanguage;
 
     @ManyToOne
     @JoinColumn(name = "center_id")

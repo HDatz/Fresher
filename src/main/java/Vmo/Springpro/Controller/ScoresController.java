@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import Vmo.Springpro.Dtorequest.ApiRespone;
+
 import Vmo.Springpro.Dtorequest.ScoresCreationRequest;
+import Vmo.Springpro.Error.AppException;
 import Vmo.Springpro.Model.Scores;
 import Vmo.Springpro.Service.ScoresService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/scores")
@@ -19,44 +19,79 @@ public class ScoresController {
     @Autowired
     private ScoresService scoresService;
 
-    // Tạo mới một Scores
+    // Tạo điểm cho fresher
     @PostMapping
-    public ResponseEntity<ApiRespone<Scores>> createScores(@RequestBody ScoresCreationRequest request) {
+    public ResponseEntity<Scores> createScores(@RequestBody ScoresCreationRequest request) {
         try {
-            Scores scores = scoresService.createScores(request);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                                 .body(new ApiRespone<>(201, "Scores created successfully", scores));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                                 .body(new ApiRespone<>(400, "Error creating Scores: " + e.getMessage(), null));
+            Scores createdScores = scoresService.createScores(request);
+            return new ResponseEntity<>(createdScores, HttpStatus.CREATED);
+        } catch (AppException ex) {
+            // Xử lý lỗi và trả về mã lỗi tương ứng
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
-    // Lấy tất cả các Scores
-    @GetMapping
-    public ResponseEntity<ApiRespone<List<Scores>>> getAllScores() {
-        List<Scores> scoresList = scoresService.getAllScores();
-        return ResponseEntity.ok(new ApiRespone<>(200, "Fetched all Scores", scoresList));
-    }
-
-    // Lấy thông tin Scores theo ID
+    // Lấy điểm theo id
     @GetMapping("/{id}")
-    public ResponseEntity<ApiRespone<Scores>> getScoresById(@PathVariable int id) {
-        Optional<Scores> scores = Optional.ofNullable(scoresService.getScoresById(id));
-        return scores.map(value -> ResponseEntity.ok(new ApiRespone<>(200, "Scores found", value)))
-                     .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                                    .body(new ApiRespone<>(404, "Scores not found", null)));
+    public ResponseEntity<Scores> getScoresById(@PathVariable int id) {
+        try {
+            Scores scores = scoresService.getScoresById(id);
+            return new ResponseEntity<>(scores, HttpStatus.OK);
+        } catch (AppException ex) {
+            // Xử lý lỗi và trả về mã lỗi tương ứng
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
-    // Cập nhật thông tin Scores
+    // Cập nhật điểm theo id
     @PutMapping("/{id}")
-    public ResponseEntity<ApiRespone<Scores>> updateScores(@PathVariable int id, @RequestBody ScoresCreationRequest request) {
+    public ResponseEntity<Scores> updateScores(@PathVariable int id, @RequestBody ScoresCreationRequest request) {
         try {
             Scores updatedScores = scoresService.updateScores(id, request);
-            return ResponseEntity.ok(new ApiRespone<>(200, "Scores updated successfully", updatedScores));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                 .body(new ApiRespone<>(404, "Error updating Scores: " + e.getMessage(), null));
+            return new ResponseEntity<>(updatedScores, HttpStatus.OK);
+        } catch (AppException ex) {
+            // Xử lý lỗi và trả về mã lỗi tương ứng
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+    }
+
+    // Xóa điểm theo id
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteScores(@PathVariable int id) {
+        try {
+            scoresService.deleteScores(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (AppException ex) {
+            // Xử lý lỗi và trả về mã lỗi tương ứng
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Lấy tất cả điểm
+    @GetMapping
+    public ResponseEntity<List<Scores>> getAllScores() {
+        List<Scores> scoresList = scoresService.getAllScores();
+        return new ResponseEntity<>(scoresList, HttpStatus.OK);
+    }
+
+    // Lấy điểm tốt
+    @GetMapping("/good")
+    public ResponseEntity<List<Scores>> getGoodScores() {
+        List<Scores> goodScores = scoresService.getGoodScores();
+        return new ResponseEntity<>(goodScores, HttpStatus.OK);
+    }
+
+    // Lấy điểm trung bình
+    @GetMapping("/mid")
+    public ResponseEntity<List<Scores>> getMidScores() {
+        List<Scores> midScores = scoresService.getMidScores();
+        return new ResponseEntity<>(midScores, HttpStatus.OK);
+    }
+
+    // Lấy điểm kém
+    @GetMapping("/low")
+    public ResponseEntity<List<Scores>> getLowScores() {
+        List<Scores> lowScores = scoresService.getLowScores();
+        return new ResponseEntity<>(lowScores, HttpStatus.OK);
     }
 }
