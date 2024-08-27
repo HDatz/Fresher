@@ -1,3 +1,5 @@
+/Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Config/MailConfig.java
+/Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Config/ThymeleafConfig.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Controller/AuthenticationController.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Controller/CenterController.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Controller/FPController.java
@@ -28,12 +30,12 @@
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Model/User.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Service/AuthenticationService.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Service/CenterService.java
+/Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Service/EmailService.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Service/FPService.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Service/FresherService.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Service/ProjectService.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/Service/ScoresService.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/repository/CenterRepository.java
-/Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/repository/EmailLogsRepository.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/repository/FPRepository.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/repository/FresherRepository.java
 /Users/fstudio/Documents/Fresher-main/src/main/java/Vmo/Springpro/repository/ProjectRepository.java

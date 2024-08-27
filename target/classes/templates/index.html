@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Notification</title>
+    <style>
+        .header {
+            background-color: black;
+            color: yellow;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            font-size: 24px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">THÔNG BÁO TỪ COMPANY VMO</div>
+    
+    <p>Chào <span th:text="${name}">Name</span>,</p>
+    <p>Bạn đã bị xóa khỏi dự án <span th:text="${projectName}">Project Name</span>.</p>
+    <p>Trân trọng,<br>Đội ngũ quản lý dự án</p>
+</body>
+</html>

@@ -35,7 +35,7 @@ public class FresherService {
         fresher.setName(request.getName());
         fresher.setEmail(request.getEmail());
         fresher.setPhone(request.getPhone());
-        fresher.setProgrammingLanguage(request.getProgrammingLanguages());
+        fresher.setProgrammingLanguage(request.getProgrammingLanguage());
 
         // Liên kết fresher với center
         Center center = centerRepository.findById(request.getCenterId())
@@ -91,7 +91,7 @@ public class FresherService {
         fresher.setName(request.getName());
         fresher.setEmail(request.getEmail());
         fresher.setPhone(request.getPhone());
-        fresher.setProgrammingLanguage(request.getProgrammingLanguages());
+        fresher.setProgrammingLanguage(request.getProgrammingLanguage());
 
         Center center = centerRepository.findById(request.getCenterId())
                 .orElseThrow(() -> new AppException(ErrorClass.CENTER_NOT_FOUND));

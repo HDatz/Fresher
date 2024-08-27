@@ -21,6 +21,9 @@ public class ErrorClass {
     public static final ErrorClass SCORE_NOT_FOUND = new ErrorClass(1005, "Scores không tồn tại.");
     public static final ErrorClass USER_NOT_EXISTED = new ErrorClass(1006, "User không tồn tại.");
     public static final ErrorClass UNAUTHENTICATED = new ErrorClass(1007, "KHÔNG ĐƯỢC XÁC THỰC");
+    public static final ErrorClass RELATIONSHIP_ALREADY_EXISTS = new ErrorClass(1008, "Mối quan hệ giữa Fresher và Project đã tồn tại.");
+
+
 
  
 }
